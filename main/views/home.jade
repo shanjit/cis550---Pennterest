@@ -1,0 +1,37 @@
+extends layout
+
+block content
+        div.container-fluid
+                div.row-fluid(align="center")#home
+                        div.well.span2
+                                p Welcome
+                                p to
+                                p Pennterest
+                                button(data-bind="click:initAddObject, attr:{style:'margin:5px'}") Add an object
+                                div#addObject(title="Add a pin", style="display: none")
+                                    input(type="text", placeholder="Type in the object's url...", name="object", id='objectInput', autofocus="true", required)
+                                    input(type="text", placeholder="Type in any tags, separated by commas", name="tag", id='tagInput', autofocus="true", required)
+                                    select(data-bind="options: ['photo', 'video', 'pdf', 'other'], value: objectType, optionsCaption: 'What type of object is this?'")
+                                    button(data-bind="click:addObject") Add it
+                                button(data-bind="click:initAddBoard,attr:{style:'margin:5px'}") Add a Board
+                                div#addBoard(title="Add a board", style="display: none")                                    
+                                    input(type="text", placeholder="Type in name of board", name="boardName", id='boardName', autofocus="true", required)
+                                    button(data-bind="click:addBoard") Add it
+                                div#addBoardDone(title="Board Added", style="display: none")
+                                    p Your board has been added!
+                        div.well.span8
+                                p board info
+                        div.well.span2
+                                p Recommended Pins
+                                |<p data-bind="visible: loading">loading...</p>
+                                button(data-bind="click:getNewRecs, visible: !loading()") New Recommendations
+                                |<div data-bind="foreach: recommendations">
+                                |<img data-bind="attr:{style:'cursor:pointer; margin:5px', src: $data.URL, id: 'reco'+$index()}, click:function(data, event){$parent.pinit($index,$data.URL)}"/>
+                                |</div>
+                                |</div>
+                                div#dialog(title="Pin it!", style="display: none")
+                                    img(data-bind="attr:{src: url}")
+                                    select(data-bind="options: boards, optionsText: 'BOARDNAME', value: selectedBoard, optionsCaption: 'Choose a board'")
+                                    button(data-bind="click:sendPin") Pin it
+                                div#noBoard(title="Pin it!", style="display: none")
+                                    p Looks like you have no more boards to pin this to!

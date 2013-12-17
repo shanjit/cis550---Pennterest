@@ -1,0 +1,78 @@
+extends layout
+
+block content
+		div.container-fluid
+				div.well#users
+						div.row-fluid
+								div.span12(align="center")
+										ul.nav.nav-pills
+												li
+														a(href="#",onclick="clickpin()", id="pin") Pins
+												li.active
+														a(href="#", onclick="clickuser()",  id="user") Users
+
+
+										hr
+
+						- for (var i = 0; i < results.length; i=i+4)
+								div.row-fluid(align="center")
+										div.span12
+												div.span3.offset1
+														ul.thumbnails
+																li.span12
+																		- if (typeof (results[i]) !=='undefined')
+																				a.h5(data-bind="click: function(data, event){seeUser("+results[i].USERID+",'"+results[i].EMAILID+"');}, attr:{style:'cursor:pointer'}") #{results[i].FIRSTNAME} #{results[i].LASTNAME}
+																				br
+																				h5 #{results[i].EMAILID}
+																				div(id="user"+results[i].USERID, title="Check out this user", style="display: none")
+																					p(data-bind="visible: !friend()") Want to follow #{results[i].FIRSTNAME} #{results[i].LASTNAME}?
+																					p(data-bind="visible: friend") You are following #{results[i].FIRSTNAME} #{results[i].LASTNAME}
+																					p #{results[i].FIRSTNAME}'s affilitation is #{results[i].AFFILIATION}
+																					p #{results[i].FIRSTNAME}'s boards are:
+																						span(data-bind="text: boardsText")
+																						span(data-bind="text: interestsText")
+																					p(data-bind="visible: loading") Please wait...
+																					button(data-bind="visible: !friend() && !loading(), click:function(data, event){followUser('"+results[i].EMAILID+"');}") Follow #{results[i].FIRSTNAME}!
+																					button(data-bind="visible: friend() && !loading(), click:function(data, event){unfollowUser('"+results[i].EMAILID+"');}") Unfollow #{results[i].FIRSTNAME}
+
+																		else
+
+
+												div.span3.offset1
+														ul.thumbnails
+																li.span12
+																		- if (typeof (results[i+1]) !=='undefined')
+																				a.h5(data-bind="click: function(data, event){seeUser("+results[i+1].USERID+",'"+results[i+1].EMAILID+"');}, attr:{style:'cursor:pointer'}") #{results[i+1].FIRSTNAME} #{results[i+1].LASTNAME}
+																				br
+																				h5 #{results[i+1].EMAILID}
+																				div(id="user"+results[i+1].USERID, title="Check out this user", style="display: none")
+																					p(data-bind="visible: !friend()") Want to follow #{results[i+1].FIRSTNAME} #{results[i+1].LASTNAME}?
+																					p(data-bind="visible: friend") You are following #{results[i+1].FIRSTNAME} #{results[i+1].LASTNAME}
+																					p #{results[i+1].FIRSTNAME}'s affilitation is #{results[i+1].AFFILIATION}
+																					p #{results[i+1].FIRSTNAME}'s boards are:
+																						span(data-bind="text: boardsText")
+																						span(data-bind="text: interestsText")
+																					p(data-bind="visible: loading") Please wait...
+																					button(data-bind="visible: !friend() && !loading(), click:function(data, event){followUser('"+results[i+1].EMAILID+"');}") Follow #{results[i+1].FIRSTNAME}!
+																					button(data-bind="visible: friend() && !loading(), click:function(data, event){unfollowUser('"+results[i+1].EMAILID+"');}") Unfollow #{results[i+1].FIRSTNAME}
+																		else
+
+												div.span3.offset1
+														ul.thumbnails
+																li.span12
+																		- if (typeof (results[i+2]) !=='undefined')
+																				a.h5(data-bind="click: function(data, event){seeUser("+results[i+2].USERID+",'"+results[i+2].EMAILID+"');}, attr:{style:'cursor:pointer'}") #{results[i+2].FIRSTNAME} #{results[i+2].LASTNAME}
+																				br
+																				h5 #{results[i+2].EMAILID}
+																				div(id="user"+results[i+2].USERID, title="Check out this user", style="display: none")
+																					p(data-bind="visible: !friend()") Want to follow #{results[i+2].FIRSTNAME} #{results[i+2].LASTNAME}?
+																					p(data-bind="visible: friend") You are following #{results[1+2].FIRSTNAME} #{results[i+2].LASTNAME}
+																					p #{results[i+2].FIRSTNAME}'s affilitation is #{results[i+2].AFFILIATION}
+																					p #{results[i+2].FIRSTNAME}'s boards are:
+																						span(data-bind="text: boardsText")
+																						span(data-bind="text: interestsText")
+																					p(data-bind="visible: loading") Please wait...
+																					button(data-bind="visible: !friend() && !loading(), click:function(data, event){followUser('"+results[i+2].EMAILID+"');}") Follow #{results[i+2].FIRSTNAME}!
+																					button(data-bind="visible: friend() && !loading(), click:function(data, event){unfollowUser('"+results[i+2].EMAILID+"');}") Unfollow #{results[i+2].FIRSTNAME}                                                                        else
+>>>>>>> ef919c55e16aa2e5e9d44591a720c8a2ee155fb9
+

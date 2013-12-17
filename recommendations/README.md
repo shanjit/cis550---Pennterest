@@ -1,0 +1,3 @@
+File has been moved to main/lib Tester gives a simple example of how to call it.
+
+The algorithm is straightforward: it takes all pins that have a tag that you are intersted in and takes the (numToSend) that your friends have pinned. It concats those two and picks a random (numToSend) from that list. If there aren't enough, it will resort to adding in the most pinned objects. I'll have to put in more data to test it more, but this seems roughly functional.

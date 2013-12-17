@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="pennterest" type="pinsiteType">
+	    <xs:key name="objId">
+	      <xs:selector xpath="object"/>
+	      <xs:field xpath="id"/>
+	      <xs:field xpath="source"/>
+	    </xs:key>
+	    <xs:key name="userId">
+	      <xs:selector xpath="user"/>
+	      <xs:field xpath="login"/>
+	    </xs:key>
+      <xs:keyref name="friendRef" refer="userId">
+      	<xs:selector xpath="user/friend"/>
+      	<xs:field xpath="."/>
+      </xs:keyref>
+      <xs:keyref name="pinObjectRef" refer="objId">
+      	<xs:selector xpath="user/pin"/>
+      	<xs:field xpath="objectId"/>
+        <xs:field xpath="sourceId"/>
+      </xs:keyref>
+    </xs:element>
+
+	<xs:simpleType name="objectClass">
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="photo" />
+	    <xs:enumeration value="pdf" />
+	    <xs:enumeration value="video" />
+	  </xs:restriction>
+	</xs:simpleType>    
+	
+    <xs:complexType name="pinsiteType">
+    	<xs:sequence>
+    		<!--  The group or owner of the Pinterest site -->
+    		<xs:element name="operator" type="xs:string"></xs:element>
+    		<!-- URL of your Pinterest clone -->
+    		<xs:element name="web_url" type="xs:string"></xs:element>
+    		<!-- The things to be pinned / rated -->
+    		<xs:element name="object" type="objType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    		<xs:element name="user" type="userType" minOccurs="0" maxOccurs="unbounded">
+    		<!--  these keys and keyrefs are relative to the user, i.e., board is unique to user -->
+			    <xs:key name="boardId">
+			      <xs:selector xpath="board"/>
+			      <xs:field xpath="name"/>
+			    </xs:key>
+		      <xs:keyref name="pinBoardRef" refer="boardId">
+		      	<xs:selector xpath="pin"/>
+		      	<xs:field xpath="board"/>
+		      </xs:keyref>
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="objType">
+    	<xs:sequence>
+    		<!-- Object ID as assigned by the project group -->
+    		<xs:element name="id" type="xs:integer"></xs:element>
+    		<!-- The origin of the object, i.e., the name of the Project Group that supplied it -->
+    		<xs:element name="source" type="xs:string"></xs:element>
+    		<!--  photo, PDF, etc -->
+    		<xs:element name="type" type="objectClass"></xs:element>
+    		<!-- Original group -->
+    		<xs:element name="url" type="xs:string"></xs:element>
+    		<xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="userType">
+      <xs:sequence>
+        <xs:element name="login" type="xs:string"></xs:element>
+        <xs:element name="email" type="xs:string"></xs:element>
+        <xs:element name="givenname" type="xs:string"></xs:element>
+        <xs:element name="surname" type="xs:string"></xs:element>
+        <xs:element name="affiliation" type="xs:string"></xs:element>
+        <xs:element name="birthday" type="xs:date"></xs:element>
+        <xs:element name="interests" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        <xs:element name="friend" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        <xs:element name="board" type="boardType" maxOccurs="unbounded"></xs:element>
+        <xs:element name="pin" type="pinType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        <xs:element name="rating" type="ratingType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="boardType">
+      <xs:sequence>
+      	<!--  Board name should be unique per user -->
+        <xs:element name="name" type="xs:string"></xs:element>
+        <!--  can optionally define a type of board -->
+        <xs:element name="type" type="xs:string" minOccurs="0"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="pinType">
+      <xs:sequence>
+      	<!--  Reference to the object being pinned -->
+   		<xs:element name="objectId" type="xs:integer"></xs:element>
+   		<!--  Reference to the object's creating group / source -->
+   		<xs:element name="sourceId" type="xs:string"></xs:element>
+   		<!--  changed from the last homework: let's make pins associated with ONLY the user's
+   		board -->
+   		<xs:element name="board" type="xs:string"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <!--  Separated from pinning, as per discussion -->
+    <xs:complexType name="ratingType">
+      <xs:sequence>
+      	<!--  Reference to the object being pinned -->
+   		<xs:element name="objectId" type="xs:integer"></xs:element>
+   		<!--  Reference to the object's creating group / source -->
+   		<xs:element name="sourceId" type="xs:string"></xs:element>
+   		<xs:element name="rating" type="xs:integer"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

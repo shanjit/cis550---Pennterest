@@ -1,0 +1,53 @@
+extends layout
+
+block content
+        div.container-fluid
+                div.well
+                        div.row-fluid
+                                div.span12(align="center")
+                                    div.span4.pull-left
+                                        ul.nav.nav-pills
+                                                li
+                                                        a(href="#",onclick="clickpin()", id="pin") Pins
+                                                li
+                                                        a(href="#", onclick="clickuser()",  id="user") Users
+
+                                    div.span4.pull-right
+                                        ul.nav.nav-pills
+                                                li.pull-right.active
+                                                        a(href="#", onclick="clickbing()",  id="bing") Bing Search
+
+
+                                        hr
+                        - for (var i = 0; i < results.length; i=i+4)
+                                div.row-fluid(align="center")
+                                        div.span12
+                                                div.span3.offset1
+                                                        ul.thumbnails
+                                                                li.span12
+                                                                        - if (typeof (results[i]) !=='undefined')
+                                                                            img(src="" + results[i].Thumbnail.MediaUrl, width="500", height="150")
+
+                                                                        else
+
+
+                                                div.span3.offset1
+                                                        ul.thumbnails
+                                                                li.span12
+                                                                        - if (typeof (results[i+1]) !=='undefined')
+                                                                                img(src="" + results[i+1].Thumbnail.MediaUrl, width="500", height="150")
+                                                                
+                                                                        else
+
+                                                div.span3.offset1
+                                                        ul.thumbnails
+                                                                li.span12
+                                                                        - if (typeof (results[i+2]) !=='undefined')
+                                                                               img(src="" + results[i+2].Thumbnail.MediaUrl, width="500", height="150")
+                                                                
+                                                                        else
+
+                                                                        
+                        div#dialog(title="Pin it!", style="display: none")
+                            select(data-bind="options: boards, optionsText: 'BOARDNAME', value: selectedBoard, optionsCaption: 'Choose a board'")
+                            button(data-bind="click:sendPinSearch") Pin it

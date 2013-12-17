@@ -1,0 +1,16 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.5",
+    "jade": "*",
+    "oracle": "*",
+    "aws-sdk": "~2.0.0-rc2",
+    "request": "~2.29.0",
+    "bcrypt-nodejs": "*"
+  }
+}

@@ -1,0 +1,78 @@
+head
+	link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+ 
+<br>
+div.navbar
+	div.container
+		div.navbar-header
+			div.brand
+		div(align="right")
+			ul.nav
+				li.active
+					a(href='#') Home
+				li
+					a(href='#') About
+				li  
+					a(href='#') Contact
+
+
+//p #{results[0].FIRSTNAME}
+
+
+div.container-fluid
+	div.well
+
+		div.row-fluid
+			div.span8
+				div.page-header(align="Center")
+					h1  SMJA-SMJA
+						small     CIS 550 Project
+
+			div.span4
+				div(align="center")
+					h2(align="center") Search
+					input.form-control(type="search", id="input", autofocus="true")
+		
+
+		div.row-fluid
+
+			div.span12(align="center")
+				ul.nav.nav-tabs
+					li.active
+						a(href='#') Pins
+					li
+						a(href='#') Users
+					li  
+						a(href='#') Boards
+
+
+
+		div.row-fluid(align="center")
+			div.span12
+				each result, i in results
+					div.span3
+						ul.thumbnails
+							li.span12
+								a.thumbnail(href="http://127.0.0.1:3000/pin/"+results[i].OBJECTID)
+									img(src="" + results[i].URL)
+								
+								a.h5(href="http://127.0.0.1:3000/board/"+results[i].BOARDID) #{results[i].BOARDNAME}, 
+
+								a.h5(href="http://127.0.0.1:3000/user/"+results[i].USERID) #{results[i].FIRSTNAME}  #{results[i].LASTNAME}
+
+
+
+	footer
+		p #{results.length}
+		
+		p #{length}
+
+		p(id = "print")
+
+		ul
+			each book, i in results
+				li(value=i) Results #{book.OBJECTID}
+
+
+script 
+	document.getElementById("print").innerHTML=#{length}/4;

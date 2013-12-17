@@ -1,0 +1,12 @@
+{
+  "name": "Caching CIS550 final project",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "request": "~2.29.0",
+    "aws-sdk": "~2.0.0-rc2"
+  }
+}

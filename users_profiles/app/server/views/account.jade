@@ -1,0 +1,42 @@
+// preset form values if we receive a userdata object //
+- user = typeof(udata) != 'undefined' ? udata : { }
+- interests = typeof(interests) !== 'undefined' ? interests : { }
+// store the userId on the client side in a hidden input field //
+input(type='hidden', value= user['USERID'])#userId
+
+#account-form-container
+	form( method="post")#account-form.form-horizontal.well.span6
+		h1
+		
+		hr
+		button(type='button')#account-form-btn3.btn
+		h3 Name:
+		p.note= user['FIRSTNAME'] + " " + user['LASTNAME']
+		h3 Affiliation:	
+		p.note= user['AFFILIATION']
+		table
+			thead
+				tr: th Interests
+			tbody	
+				each interest, i in interests
+					td= interests[i]['INTEREST']
+
+		fieldset
+			
+			hr
+			p#sub2.subheading
+			#user-cg.control-group
+				label.control-label(for='user-tf') Username
+				.controls
+					input#user-tf.input-xlarge.disabled(type='text', name='user', value= user['EMAILID'])
+			#pass-cg.control-group
+				label.control-label(for='pass-tf') Password
+				.controls
+					input#pass-tf.input-xlarge(type='password', name='pass', value='')
+			.form-actions
+				button(type='button')#account-form-btn1.btn
+				button(type='submit')#account-form-btn2.btn
+
+// display form errors in a custom modal window //
+
+include modals/form-errors

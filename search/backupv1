@@ -1,0 +1,135 @@
+
+
+	function Foo(name) {
+  	this.name = name;
+  	this.data = [1, 2, 3]; // setting a non-primitive property
+	};
+	
+	Foo.prototype.showData = function () { console.log(this.name, this.data); 
+
+		alert('This is it' + this.name + " " + this.data);
+	};
+	
+	var foo1 = new Foo("foo1");
+	var foo2 = new Foo("foo2");
+
+	foo1.showData();
+	foo2.showData();
+
+
+var getAllUsers = function() {
+
+console.log("Open Connection: getAllUsers");
+
+oracle.connect(connectData, function(err, connection) {
+
+  if ( err ) {
+      console.log('Connection Status: ' + connectionStatus);
+    } else {
+      connectionStatus = 'Established';
+      console.log('Connection Status: ' + connectionStatus);
+    }
+
+  connection.execute("SELECT * FROM USERS u", [], function(err, results) {
+
+    if ( err ) {
+      console.log(err);
+    } else {
+      //console.log(results[0].FIRSTNAME);
+    }
+
+  console.log("Close connection: checkConnection");
+  connection.close;
+
+  return results;
+  
+  });
+
+  });
+
+
+}
+
+
+
+
+
+
+
+
+// Working code till now custom.js
+
+
+// custom.js
+// ========
+
+var oracle = require("oracle");
+
+//var connectData = { "hostname": "cis550pennterest.cbhrefkoivty.us-east-1.rds.amazonaws.com", "user": "cis550project", "password": "smja-smja", "database": "PENNTR" };
+//var connectionStatus = "Not Established";
+
+
+function SearchConnection (connectData)
+{
+  this.connectData = connectData;
+}
+
+SearchConnection.prototype.isConnected = function(pins) {
+
+  oracle.connect(this.connectData, function(err, connection) {
+
+  if ( err ) {
+      //console.log('Connection Status: ' + connectionStatus);
+      console.log('Connection not established');
+    } else {
+      //connectionStatus = 'Established';
+      //console.log('Connection Status: ' + connectionStatus);
+      console.log('Connection established');
+    }
+
+    console.log("Close connection: checkConnection");
+
+    console.log("You tried searching for, " + pins);
+    connection.close;
+
+  });
+
+  
+}
+
+
+exports.SearchConnection = SearchConnection;
+
+
+
+
+//
+
+
+
+//console.log("logging from myapp" + results[0].firstName);
+
+/*
+
+Make user profiles and run this to show individual posts.
+
+Also implement the same for user boards. 
+
+app.get('/user/:id', function (req, res){
+	connection.query('SELECT * FROM Users where userID ='+req.params.id, function (error, rows, fields) { 
+         res.writeHead(200, {'Content-Type': 'text/plain'});
+		 str='';
+		 if(rows.length==0)
+		 {
+			res.end( 'no such record found...');
+			//break;
+		 }
+		 else
+		 {
+			str = str + 'User is '+ rows[0].firstName +'\n';
+			res.end( str);
+		}
+      }); 
+});
+
+*/

@@ -1,0 +1,6 @@
+h1 WANNA PIN THIS PICTURE?
+img(src="" + object["URL"])
+p Pick a board to pin this to
+each board, i in boards
+     form(action="/pinit/"+"oid="+object["OBJECTID"]+"&sid="+object["SOURCEID"]+"&bid="+boards[i]["BOARDID"], method="post")
+         input(type="submit", value=""+boards[i]['BOARDNAME'])

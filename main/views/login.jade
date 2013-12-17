@@ -1,0 +1,39 @@
+extends layout
+
+
+block content
+        div.container-fluid(style='margin: 30px 0 10px 0;')
+                div.row-fluid(align="Center")
+                        div.span7
+                                h1 Welcome to Pennterest! 
+                                img(src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQKD58R1sJsA4hyYrwWwDY_-5XIPRuk_U00uOTwxZhRlUZ9sZkJIw")
+                                h2 UPenn's Premier Social Networking Site
+                                p Beta Version (Invite only)
+                        div.well.span3.offset1(id="login-container", align="left")
+                                form( method="post")#login-form
+                                        h2 Login
+                                        if(message !== 'created')
+                                            p.subheading Please Login To Your Account
+                                        else
+                                            p.subheading Your account has been successfully created, please login
+                                        label Email: 
+                                        input(type="email", name="user", id='user-tf', autofocus="true", required, parsley-trigger="change").span12
+                                        label Password:
+                                        input(type="password", name="pass", id='pass-tf', required).span12
+                                        hr
+                                        div.span12
+                                                div.span6
+                                                        button(type="submit")#btn-login.btn.btn-primary
+                                                                i.icon-lock.icon-white
+                                                                | Sign in
+                                                div.span1
+                                                        input(type="checkbox", checked='checked')
+                                                        div.clear-fix
+                                                div.span5
+                                                        label#remember-me.checkbox Remember Me
+                                                br
+                                                div.btm-links
+                                                        a(href='#')#forgot-password Forgot Your Password?
+                                                        br
+                                                        a(href='/signup')#create-account Create An Account
+                                        
